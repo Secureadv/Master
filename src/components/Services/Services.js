@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Outlet, Link } from "react-router-dom";
 import './Services.css';
-import servicesGrowth from '../../assets/Invest&GrowthServices.png';
+import servicesGrowth from '../../assets/InvestGrowthServices.png';
 import checkbox from '../../assets/SecureAdvServicesCheckboxes.png';
 import legacyPlanning from '../../assets/SecureAdviceLegacyPlanning.png';
 import eduPlanning from '../../assets/SecureAdviceEducationPlanning.png';
 import equityPortfolio from '../../assets/SecureAdvEquityPortfolioManagement.png';
-import incomePlanning from '../../assets/Life Insurance Policies retirement & Income planning.png';
-import optionTrading from '../../assets/OptionTrading&InvestmentImg.png';
-import financialIndependenceImg from '../../assets/InvestmentGrowth&FinanacialIndependanceImg.png';
+import incomePlanning from '../../assets/Life Insurance Policies retirement Income planning.png';
+import optionTrading from '../../assets/OptionTradingInvestmentImg.png';
+import financialIndependenceImg from '../../assets/InvestmentGrowthFinanacialIndependanceImg.png';
 import expertGuidance from '../../assets/ExpertsGuidenceforIndexedUniversalLife.png';
-import customerFeedback from '../../assets/Invest&policiesFeedback.png';
+import customerFeedback from '../../assets/InvestpoliciesFeedback.png';
 
 // import * as React from 'react';
 import Accordion from '@mui/material/Accordion';

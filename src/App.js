@@ -23,10 +23,7 @@ function App() {
       </Routes>
       <Footer/>
     </BrowserRouter>
-      {/* <Home/> */}
-      {/* <Services/> */}
-      {/* <ContactUs/> */}
-      {/* <Workshop/> */}
+      
     </div>
   );
 }

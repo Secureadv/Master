@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import highlightCheckbox from "../../assets/Investment vehicles workhop highlights.png";
-import workshopImg from "../../assets/OptionTrading&InvestmentImg.png";
+import workshopImg from "../../assets/OptionTradingInvestmentImg.png";
 import clock from "../../assets/Workshoptimingsclock.png";
 import "./Workshop.css";
 
@@ -328,7 +328,7 @@ export default function () {
                             </label>
                         </div>
                         <div>
-                            <label class="container">
+                            <label className="container">
                                 Workshop 1
                                 <input
                                     type="radio"
@@ -336,11 +336,11 @@ export default function () {
                                     value="workshop1"
                                     onChange={handleWorkshopChange}
                                 />
-                                <span class="checkmark"></span>
+                                <span className="checkmark"></span>
                             </label>
                         </div>
                         <div>
-                            <label class="container">
+                            <label className="container">
                                 Workshop 2
                                 <input
                                     type="radio"
@@ -348,7 +348,7 @@ export default function () {
                                     value="workshop2"
                                     onChange={handleWorkshopChange}
                                 />
-                                <span class="checkmark"></span>
+                                <span className="checkmark"></span>
                             </label>
                         </div>
                         {workshopName == "" && isValidWorkshop == 0 ? (

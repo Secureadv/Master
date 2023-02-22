@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Outlet, Link } from "react-router-dom";
 import './Home.css';
 import secureAdvHomeBg from '../../assets/HomePageBgImg.png';
-import optionTradingImg from '../../assets/OptionTrading&InvestmentImg.png';
-import financialIndependenceImg from '../../assets/InvestmentGrowth&FinanacialIndependanceImg.png';
+import optionTradingImg from '../../assets/OptionTradingInvestmentImg.png';
+import financialIndependenceImg from '../../assets/InvestmentGrowthFinanacialIndependanceImg.png';
 import expertGuidance from '../../assets/ExpertsGuidenceforIndexedUniversalLife.png';
-import customerFeedback from '../../assets/Invest&policiesFeedback.png';
+import customerFeedback from '../../assets/InvestpoliciesFeedback.png';
 import quotes from '../../assets/ProfessionalInvestorsQuotes.png';
 
 export default function Home(){

@@ -8,7 +8,26 @@ import "./ContactUs.css";
 import { useState } from "react";
 import { width } from "@mui/system";
 
+import  { useRef } from 'react';
+import emailjs from '@emailjs/browser';
+
+
 export default function () {
+
+    const form = useRef();
+
+    const sendEmail = (e) => {
+      e.preventDefault();
+  
+      emailjs.sendForm('service_q8tdion', 'template_8x6japa', form.current, 'UzpOPpmLhNKkW9F9H')
+        .then((result) => {
+            console.log(result.text);
+            console.log('message sent')
+        }, (error) => {
+            console.log(error.text);
+        });
+    }
+
     const [firstName, setfirstName] = useState("");
     const [lastName, setlastName] = useState("");
     const [email, setEmail] = useState("");
@@ -90,8 +109,9 @@ export default function () {
         } else {
             setIsValidWorkshop(0);
         }
-        event.preventDefault();
+        // event.preventDefault();
         console.log(firstName, lastName, email, phoneNumber);
+
     };
     return (
         <div>
@@ -176,65 +196,12 @@ export default function () {
                                     )}
                                 </label>
                             </div>
-                            {/* <div>
-                                <label class="container">
-                                    Workshop 1
-                                    <input
-                                        type="radio"
-                                        name="radio"
-                                        value="workshop1"
-                                        onChange={handleWorkshopChange}
-                                    />
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div>
-                                <label class="container">
-                                    Workshop 2
-                                    <input
-                                        type="radio"
-                                        name="radio"
-                                        value="workshop2"
-                                        onChange={handleWorkshopChange}
-                                    />
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            {workshopName == "" && isValidWorkshop == 0 ? (
-                                <p>Choose any one of the above Workshops</p>
-                            ) : (
-                                ""
-                            )} */}
+                            
 
                             <button type="submit" className="registerBtn">Submit</button>
                         </form>
                     </div>
                 </div>
-
-                {/* <Box  className="contactFormContainerText"
-                    component="form"
-                    sx={{
-                        '& .MuiTextField-root': { m: 1, width: '25ch' },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                    >
-                    <div className="heading">Contact Us</div> 
-                    <form onSubmit={handleSubmit}>
-                    <div>
-                        <TextField name="firstname" onChange={handleChange} required id="outlined-required" label="First Name" defaultValue="" placeholder="Enter your First Name"/>
-                        <TextField name="lastname" onChange={handleChange} required id="outlined-required" label="Last Name" defaultValue="" placeholder="Enter your Last Name"/>
-                    </div>
-                    <div>
-                        <TextField name="email" onChange={handleChange}  required id="outlined-required" label="Email" defaultValue="" placeholder="Enter your Email"/>
-                    </div>
-                    <div>
-                        <TextField name="phnumber" onChange={handleChange}  required id="outlined-required" label="Phone Number" defaultValue="" placeholder="Enter your Phone Number"/>
-                    </div>
-                    <div><button type="submit" className="submitBtn">Submit</button></div>
-                    </form>
-                    
-                </Box> */}
             </div>
 
             {/* section 2 */}
@@ -280,6 +247,19 @@ export default function () {
                 </div>
                 <button className="primaryBtn">Register Now</button>
             </div>
+
+            {/* testing email.js  */}
+            {/* <form ref={form} onSubmit={sendEmail}>
+                <label>Name</label>
+                <input type="text" name="user_name" />
+                <label>Email</label>
+                <input type="email" name="user_email" />
+                <label>Message</label>
+                <textarea name="message" />
+                <button type="submit"  value="Send" className="primaryBtn">Submit</button>
+            </form> */}
+
+
         </div>
     );
 }
