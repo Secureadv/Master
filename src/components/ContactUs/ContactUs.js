@@ -16,17 +16,17 @@ export default function () {
    
     const form = useRef();
 
-    // const sendEmail = (e) => {
-    //   e.preventDefault();
+    const sendEmail = (e) => {
+      e.preventDefault();
   
-    //   emailjs.sendForm('service_q8tdion', 'template_8x6japa', form.current, 'UzpOPpmLhNKkW9F9H')
-    //     .then((result) => {
-    //         console.log(result.text);
-    //         console.log('message sent')
-    //     }, (error) => {
-    //         console.log(error.text);
-    //     });
-    // }
+      emailjs.sendForm('service_q8tdion', 'template_8x6japa', form.current, 'UzpOPpmLhNKkW9F9H')
+        .then((result) => {
+            console.log(result.text);
+            console.log('message sent')
+        }, (error) => {
+            console.log(error.text);
+        });
+    }
 
     const [firstName, setfirstName] = useState("");
     const [lastName, setlastName] = useState("");
@@ -48,7 +48,7 @@ export default function () {
        
     })
 
-    const PostData =async(e)=>{
+    const PostContactFormData =async(e)=>{
         // e.preventDefault()
 
         const{firstName,lastName,email,phoneNumber}=details;
@@ -145,7 +145,7 @@ export default function () {
         }
         // event.preventDefault();
         console.log(firstName, lastName, email, phoneNumber);
-        PostData(event)
+        PostContactFormData(event)
 
         // sendEmail(event)
        

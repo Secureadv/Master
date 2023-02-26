@@ -4,6 +4,7 @@ import workshopImg from "../../assets/OptionTradingInvestmentImg.png";
 import clock from "../../assets/Workshoptimingsclock.png";
 import "./Workshop.css";
 
+
 export default function () {
     const [firstName, setfirstName] = useState("");
     const [lastName, setlastName] = useState("");
@@ -17,15 +18,50 @@ export default function () {
     const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(1);
     const [isValidWorkshop, setIsValidWorkshop] = useState(1);
 
+    const [details, setDetails] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber:'', 
+        workshopName:''
+       
+    })
+
+    const PostData =async(e)=>{
+        // e.preventDefault()
+
+        const{firstName,lastName,email,phoneNumber,workshopName}=details;
+
+       const res=await fetch("https://adv-5a40a-default-rtdb.firebaseio.com/registerform.json",
+       {
+           method:'POST',
+           headers:{
+               'Content-Type':'application/json'
+           },
+           body:JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            workshopName
+           
+           })
+        })
+
+    }
+    
+
     var handleFirstNameChange = (e) => {
         // setIsValidFirstName(1);
         setfirstName(e.target.value);
+        setDetails({...details,firstName:e.target.value})
         if (firstName.length > 0) {
             setIsValidFirstName(1);
         }
     };
     var handleLastNameChange = (e) => {
         setlastName(e.target.value);
+        setDetails({...details,lastName:e.target.value})
         if (lastName.length > 0) {
             setIsValidSecondName(1);
         }
@@ -36,6 +72,7 @@ export default function () {
             setIsEmailEmpty(1);
         }
         setEmail(e.target.value);
+        setDetails({...details,email:e.target.value})
         if (
             email.match(
                 /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -46,6 +83,7 @@ export default function () {
     };
     var handlePhoneNumberChange = (e) => {
         setPhoneNumber(e.target.value);
+        setDetails({...details,phoneNumber:e.target.value})
         if (phoneNumber.length == 10) {
             setIsValidPhoneNumber(1);
         }
@@ -53,6 +91,7 @@ export default function () {
 
     var handleWorkshopChange = (e) => {
         setWorkshopName(e.target.value);
+        setDetails({...details,workshopName:e.target.value})
         if (workshopName.length > 0) {
             setIsValidSecondName(1);
         }
@@ -86,9 +125,10 @@ export default function () {
         } else {
             setIsValidWorkshop(0);
         }
-        event.preventDefault();
+        // event.preventDefault();
 
-        console.log(firstName, lastName, email, phoneNumber);
+        console.log(firstName, lastName, email, phoneNumber,workshopName);
+        PostData(event)
     };
 
     return (
@@ -352,7 +392,7 @@ export default function () {
                             </label>
                         </div>
                         {workshopName == "" && isValidWorkshop == 0 ? (
-                            <p>Choose any one of the above Workshops</p>
+                            <p className="error">Choose any one of the above Workshops</p>
                         ) : (
                             ""
                         )}
