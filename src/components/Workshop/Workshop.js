@@ -4,6 +4,9 @@ import workshopImg from "../../assets/OptionTradingInvestmentImg.png";
 import clock from "../../assets/Workshoptimingsclock.png";
 import "./Workshop.css";
 
+import  { useRef } from 'react';
+import emailjs from '@emailjs/browser';
+
 
 export default function () {
     const [firstName, setfirstName] = useState("");
@@ -50,6 +53,22 @@ export default function () {
 
     }
     
+
+
+    const form = useRef();
+
+  const sendEmail = (e) => {
+    // e.preventDefault();
+
+    emailjs.sendForm('service_1u92y5o', 'template_rvsfk5n', form.current, 'hKFHJnE0k-KUJuRoS')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+  };
+
+
 
     var handleFirstNameChange = (e) => {
         // setIsValidFirstName(1);
@@ -129,6 +148,8 @@ export default function () {
 
         console.log(firstName, lastName, email, phoneNumber,workshopName);
         PostData(event)
+
+        sendEmail(event)
     };
 
     return (
@@ -288,7 +309,7 @@ export default function () {
             <div className="registerFormContainer" id="register-section">
                 <div className="registerFormheading">Register Here</div>
                 <div className="registerForm">
-                    <form onSubmit={handleSubmit}>
+                    <form ref={form} onSubmit={handleSubmit}>
                         <div className="registerFormUsername">
                             <label className="registerFormlabel">
                                 First Name*
@@ -296,6 +317,7 @@ export default function () {
                                     <input 
                                         type="text"
                                         value={firstName}
+                                        name="user_firstName"
                                         placeholder="Enter first name"
                                         onChange={handleFirstNameChange}
                                     />
@@ -313,6 +335,7 @@ export default function () {
                                     <input
                                         type="text"
                                         value={lastName}
+                                        name="user_lastName"
                                         placeholder="Enter last name"
                                         onChange={handleLastNameChange}
                                     />
@@ -332,6 +355,7 @@ export default function () {
                                     <input
                                         type="email"
                                         value={email}
+                                        name="user_email"
                                         placeholder="Enter Email"
                                         onChange={handleEmailChange}
                                     />
@@ -355,6 +379,7 @@ export default function () {
                                     <input
                                         type="number"
                                         value={phoneNumber}
+                                        name="user_phoneNumber"
                                         placeholder="Enter phone number"
                                         onChange={handlePhoneNumberChange}
                                     />
@@ -397,7 +422,7 @@ export default function () {
                             ""
                         )}
 
-                        <button type="submit" className="registerBtn">
+                        <button type="submit" value="Send" className="registerBtn">
                             Next
                         </button>
                     </form>
