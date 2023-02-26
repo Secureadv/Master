@@ -147,9 +147,18 @@ export default function () {
         // event.preventDefault();
 
         console.log(firstName, lastName, email, phoneNumber,workshopName);
+        if(firstName.length > 0 && lastName.length > 0 && email.length > 0 && phoneNumber.length == 10 ){
+
         PostData(event)
 
         sendEmail(event)
+
+        setfirstName(' ')
+        setlastName(' ')
+        setEmail(' ')
+        setPhoneNumber(' ')
+        setWorkshopName(' ')
+        }
     };
 
     return (

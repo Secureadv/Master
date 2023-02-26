@@ -208,10 +208,15 @@ export default function () {
         if(firstName.length > 0 && lastName.length > 0 && email.length > 0 && phoneNumber.length == 10 ){
             PostContactFormData(event)
             handleClickOpen()
+            setfirstName(' ')
+            setlastName(' ')
+            setEmail(' ')
+            setPhoneNumber(' ')
         }
         
         // sendEmail(event)
        
+        
 
     };
     return (
