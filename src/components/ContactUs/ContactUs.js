@@ -5,28 +5,28 @@ import timingsLogo from "../../assets/SecureAdvClockLogo (1).png";
 import locationLogo from "../../assets/SecureAdvLocationLogo (1).png";
 import "./ContactUs.css";
 
-import { useState } from "react";
+import { useState,setFormData } from "react";
 import { width } from "@mui/system";
 
 import  { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import emailjs, { send } from '@emailjs/browser';
 
 
 export default function () {
-
+   
     const form = useRef();
 
-    const sendEmail = (e) => {
-      e.preventDefault();
+    // const sendEmail = (e) => {
+    //   e.preventDefault();
   
-      emailjs.sendForm('service_q8tdion', 'template_8x6japa', form.current, 'UzpOPpmLhNKkW9F9H')
-        .then((result) => {
-            console.log(result.text);
-            console.log('message sent')
-        }, (error) => {
-            console.log(error.text);
-        });
-    }
+    //   emailjs.sendForm('service_q8tdion', 'template_8x6japa', form.current, 'UzpOPpmLhNKkW9F9H')
+    //     .then((result) => {
+    //         console.log(result.text);
+    //         console.log('message sent')
+    //     }, (error) => {
+    //         console.log(error.text);
+    //     });
+    // }
 
     const [firstName, setfirstName] = useState("");
     const [lastName, setlastName] = useState("");
@@ -39,16 +39,48 @@ export default function () {
     const [isValidEmail, setIsValidEmail] = useState(1);
     const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(1);
     const [isValidWorkshop, setIsValidWorkshop] = useState(1);
+
+    const [details, setDetails] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber:''
+       
+    })
+
+    const PostData =async(e)=>{
+        // e.preventDefault()
+
+        const{firstName,lastName,email,phoneNumber}=details;
+
+       const res=await fetch("https://adv-5a40a-default-rtdb.firebaseio.com/contactform.json",
+       {
+           method:'POST',
+           headers:{
+               'Content-Type':'application/json'
+           },
+           body:JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            phoneNumber
+           
+           })
+        })
+
+    }
     
     var handleFirstNameChange = (e) => {
         // setIsValidFirstName(1);
         setfirstName(e.target.value);
+        setDetails({...details,firstName:e.target.value})
         if (firstName.length > 0) {
             setIsValidFirstName(1);
         }
     };
     var handleLastNameChange = (e) => {
         setlastName(e.target.value);
+        setDetails({...details,lastName:e.target.value})
         if (lastName.length > 0) {
             setIsValidSecondName(1);
         }
@@ -59,6 +91,7 @@ export default function () {
             setIsEmailEmpty(1);
         }
         setEmail(e.target.value);
+        setDetails({...details,email:e.target.value})
         if (
             email.match(
                 /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -69,6 +102,7 @@ export default function () {
     };
     var handlePhoneNumberChange = (e) => {
         setPhoneNumber(e.target.value);
+        setDetails({...details,phoneNumber:e.target.value})
         if (phoneNumber.length == 10) {
             setIsValidPhoneNumber(1);
         }
@@ -111,6 +145,10 @@ export default function () {
         }
         // event.preventDefault();
         console.log(firstName, lastName, email, phoneNumber);
+        PostData(event)
+
+        // sendEmail(event)
+       
 
     };
     return (
@@ -130,6 +168,7 @@ export default function () {
                                     <input style={{width:"80%"}}
                                         type="text"
                                         value={firstName}
+                                        name="user_name"
                                         placeholder="Enter first name"
                                         onChange={handleFirstNameChange}
                                     />
@@ -146,6 +185,7 @@ export default function () {
                                     <input
                                         type="text"
                                         value={lastName}
+                                        name="user_lastname"
                                         placeholder="Enter last name"
                                         onChange={handleLastNameChange}
                                     />
@@ -163,6 +203,7 @@ export default function () {
                                     <input
                                         type="email"
                                         value={email}
+                                        name="email"
                                         placeholder="Enter Email"
                                         onChange={handleEmailChange}
                                     />
@@ -184,6 +225,7 @@ export default function () {
                                     <input
                                         type="number"
                                         value={phoneNumber}
+                                        name="phonenumber"
                                         placeholder="Enter phone number"
                                         onChange={handlePhoneNumberChange}
                                         maxLength={10}
