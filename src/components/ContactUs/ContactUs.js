@@ -11,22 +11,82 @@ import { width } from "@mui/system";
 import  { useRef } from 'react';
 import emailjs, { send } from '@emailjs/browser';
 
+import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
+
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+      padding: theme.spacing(2),
+    },
+    '& .MuiDialogActions-root': {
+      padding: theme.spacing(1),
+    },
+  }));
+  
+  function BootstrapDialogTitle(props) {
+    const { children, onClose, ...other } = props;
+  
+    return (
+      <DialogTitle sx={{ m: 0, p: 2, textAlign:"center", }} {...other}>
+        {children}
+        {onClose ? (
+          <IconButton
+            aria-label="close"
+            onClick={onClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        ) : null}
+      </DialogTitle>
+    );
+  }
+  
+  BootstrapDialogTitle.propTypes = {
+    children: PropTypes.node,
+    onClose: PropTypes.func.isRequired,
+  };
+
+  
 
 export default function () {
-   
-    const form = useRef();
 
-    const sendEmail = (e) => {
-      e.preventDefault();
+    const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+   
+    // const form = useRef();
+
+    // const sendEmail = (e) => {
+    //   e.preventDefault();
   
-      emailjs.sendForm('service_q8tdion', 'template_8x6japa', form.current, 'UzpOPpmLhNKkW9F9H')
-        .then((result) => {
-            console.log(result.text);
-            console.log('message sent')
-        }, (error) => {
-            console.log(error.text);
-        });
-    }
+    //   emailjs.sendForm('service_q8tdion', 'template_8x6japa', form.current, 'UzpOPpmLhNKkW9F9H')
+    //     .then((result) => {
+    //         console.log(result.text);
+    //         console.log('message sent')
+    //     }, (error) => {
+    //         console.log(error.text);
+    //     });
+    // }
 
     const [firstName, setfirstName] = useState("");
     const [lastName, setlastName] = useState("");
@@ -143,10 +203,13 @@ export default function () {
         } else {
             setIsValidWorkshop(0);
         }
-        // event.preventDefault();
+        event.preventDefault();
         console.log(firstName, lastName, email, phoneNumber);
-        PostContactFormData(event)
-
+        if(firstName.length > 0 && lastName.length > 0 && email.length > 0 && phoneNumber.length == 10 ){
+            PostContactFormData(event)
+            handleClickOpen()
+        }
+        
         // sendEmail(event)
        
 
@@ -241,6 +304,31 @@ export default function () {
                             
 
                             <button type="submit" className="registerBtn">Submit</button>
+
+                            <div>
+
+      <BootstrapDialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose} className="heading">
+          Thank You
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom className="contactCardsContent">
+            Your Details has been successfully submitted.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose} className="workshopBtn">
+            Ok
+          </Button>
+        </DialogActions>
+      </BootstrapDialog>
+    </div>
+
+
                         </form>
                     </div>
                 </div>
@@ -290,16 +378,7 @@ export default function () {
                 <button className="primaryBtn">Register Now</button>
             </div>
 
-            {/* testing email.js  */}
-            {/* <form ref={form} onSubmit={sendEmail}>
-                <label>Name</label>
-                <input type="text" name="user_name" />
-                <label>Email</label>
-                <input type="email" name="user_email" />
-                <label>Message</label>
-                <textarea name="message" />
-                <button type="submit"  value="Send" className="primaryBtn">Submit</button>
-            </form> */}
+            
 
 
         </div>
