@@ -4,7 +4,7 @@ import contactLogo from "../../assets/SecureAdvCallLogo (1).png";
 import timingsLogo from "../../assets/SecureAdvClockLogo (1).png";
 import locationLogo from "../../assets/SecureAdvLocationLogo (1).png";
 import "./ContactUs.css";
-
+import { Outlet, Link } from "react-router-dom";
 import { useState,setFormData } from "react";
 import { width } from "@mui/system";
 
@@ -322,7 +322,7 @@ export default function () {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom className="contactCardsContent">
-            Your Details has been successfully submitted.
+            Thank you for contacting us, our support team will reach out to you shortly!
           </Typography>
         </DialogContent>
         <DialogActions>
@@ -348,10 +348,10 @@ export default function () {
                             <img src={contactLogo} alt="contactlogo"></img>
                         </div>
                         <div className="contactCardsContent">
-                            (+1) 470-828-4948
+                            (+1) 470-680-9937
                         </div>
                         <div className="contactCardsContent">
-                            secureadv@gmail.com
+                            support@secureadv.com
                         </div>
                     </div>
                     <div className="contactCard">
@@ -359,8 +359,7 @@ export default function () {
                             <img src={locationLogo} alt="locationlogo"></img>
                         </div>
                         <div className="contactCardsContent">
-                            SecureAdv - 1420 Gemini Blvd. Unit 12, Atlanta,
-                            GEORGIA,32837 USA.
+                            Coming soon
                         </div>
                     </div>
                     <div className="contactCard">
@@ -380,7 +379,7 @@ export default function () {
                 <div className="contactPageSection3Header">
                     Join our upcoming Investment Vehicles Workshop
                 </div>
-                <button className="primaryBtn">Register Now</button>
+                <button className="primaryBtn"><Link className='Btn' to="/workshop">Register Now</Link></button>
             </div>
 
             

@@ -34,9 +34,9 @@ export default function Footer(){
             </div>
             <div className="footerSection3">
                 <div className="footerHeader">CONTACT US</div>
-                <div className="footerContactInfo"><img src={call} className="footerIcons"></img><span className="footerContent">407-896-6458</span></div>
-                <div className="footerContactInfo"><img src={email} className="footerIcons"></img><span className="footerContent">secureadv@gmail.com</span></div>
-                <div className="footerContactInfo"><img src={location} className="footerIcons"></img><span className="footerContent">SecureAdv  - 1420 Gemini Blvd. Unit 12, Atlanta, GEORGIA,32837 USA.</span></div>
+                <div className="footerContactInfo"><img src={call} className="footerIcons"></img><span className="footerContent">407-680-9937</span></div>
+                <div className="footerContactInfo"><img src={email} className="footerIcons"></img><span className="footerContent">support@secureadv.com</span></div>
+                <div className="footerContactInfo"><img src={location} className="footerIcons"></img><span className="footerContent">coming soon</span></div>
             </div>
 
         </div>

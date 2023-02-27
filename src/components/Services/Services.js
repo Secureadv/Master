@@ -126,7 +126,7 @@ export default function Services(){
                     <div className="card1">
                         <img src={financialIndependenceImg} className="card1Img"></img>
                         <div className="card1Header">Solutions For Financial Independance</div>
-                        <div className="card1Content">Lorem ipsum dolor sit amet, consectetur adipiscing  </div>
+                        <div className="card1Content">Market tested and proven option trading workshops, long and short term investment vehicles and ideas. </div>
                     </div>
                     <div className="card1">
                         <img src={expertGuidance} className="card1Img"></img>

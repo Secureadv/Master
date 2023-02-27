@@ -34,7 +34,7 @@ export default function Home(){
                     <div className="card">
                         <img src={optionTradingImg} className="cardImg"></img>
                         <div className="cardHeader">Investment Vehicles Workshop</div>
-                        <div className="cardContent">Starting March 11, 2023 </div>
+                        <div className="cardContent">Starting March 18, 2023 </div>
                         <button className="cardBtn"> <Link className='Btn' to="/workshop"> Register Now</Link></button>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ export default function Home(){
                     <div className="card1">
                         <img src={financialIndependenceImg} className="card1Img"></img>
                         <div className="card1Header">Solutions For Financial Independance</div>
-                        <div className="card1Content">Lorem ipsum dolor sit amet, consectetur adipiscing  </div>
+                        <div className="card1Content">Market tested and proven option trading workshops, long and short term investment vehicles and ideas. </div>
                     </div>
                     <div className="card1">
                         <img src={expertGuidance} className="card1Img"></img>

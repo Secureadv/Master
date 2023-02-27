@@ -2,13 +2,75 @@ import React, { useState } from "react";
 import highlightCheckbox from "../../assets/Investment vehicles workhop highlights.png";
 import workshopImg from "../../assets/OptionTradingInvestmentImg.png";
 import clock from "../../assets/Workshoptimingsclock.png";
+import Zelle_QR from "../../assets/ZelleQR.jpg"
 import "./Workshop.css";
 
 import  { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 
+import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+      padding: theme.spacing(2),
+    },
+    '& .MuiDialogActions-root': {
+      padding: theme.spacing(1),
+    },
+  }));
+  
+  function BootstrapDialogTitle(props) {
+    const { children, onClose, ...other } = props;
+  
+    return (
+      <DialogTitle sx={{ m: 0, p: 2, textAlign:"center", }} {...other}>
+        {children}
+        {onClose ? (
+          <IconButton
+            aria-label="close"
+            onClick={onClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        ) : null}
+      </DialogTitle>
+    );
+  }
+  
+  BootstrapDialogTitle.propTypes = {
+    children: PropTypes.node,
+    onClose: PropTypes.func.isRequired,
+  };
+
+  
+
 
 export default function () {
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+    const handleClose = () => {
+      setOpen(false);
+    };
+
     const [firstName, setfirstName] = useState("");
     const [lastName, setlastName] = useState("");
     const [email, setEmail] = useState("");
@@ -144,7 +206,7 @@ export default function () {
         } else {
             setIsValidWorkshop(0);
         }
-        // event.preventDefault();
+        event.preventDefault();
 
         console.log(firstName, lastName, email, phoneNumber,workshopName);
         if(firstName.length > 0 && lastName.length > 0 && email.length > 0 && phoneNumber.length == 10 ){
@@ -152,12 +214,13 @@ export default function () {
         PostData(event)
 
         sendEmail(event)
+        handleClickOpen()
 
         setfirstName(' ')
         setlastName(' ')
         setEmail(' ')
         setPhoneNumber(' ')
-        setWorkshopName(' ')
+        setWorkshopName(0)
         }
     };
 
@@ -174,6 +237,26 @@ export default function () {
                         than 15 hours of your time on this pragmatic, market
                         agnostic, retail investor friendly workshop.{" "}
                     </div>
+                    <div className="workshopDetailsContainer">
+                        <div className="workshop1Card">
+                            <div className="workshop1CardHeader">Workshop1 Schedule</div>
+                                <div className="workshop1CardContent"> 
+                                <div>Day-1:Mar 18,19 2pm - 5pm EST </div>
+                                <div>Day-2: Mar 20,22,24 8pm - 9 pm EST</div> 
+                                <div>Day-3: Mar 25,26 2pm-4pm EST</div>
+                                </div>
+                        </div>
+                        <div className="workshop1Card">
+                            <div className="workshop1CardHeader">Workshop2 Schedule</div>
+                                <div className="workshop1CardContent"> 
+                                <div>Day-1:May 6,7 2pm-5pm EST </div>
+                                <div>Day-2: May 8,10,12 8pm-9pm EST</div> 
+                                <div>Day-3: May 13,14 2pm-4pm EST</div>
+                                </div>
+                        </div>
+                    </div>
+
+
                     <div className="workshopPrice">
                         Get started for just $395
                     </div>
@@ -229,14 +312,14 @@ export default function () {
                             , IRAs and a host of other products
                         </span>
                     </div>
-                    <div className="workshopHighlights">
+                    {/* <div className="workshopHighlights">
                         <img src={highlightCheckbox}></img>
                         <span className="highlightsContent">
                             Work with our licensed financials professionals to
                             design and implement the right investment vehicle
                             which helps you meet your financial goals
                         </span>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
@@ -250,13 +333,13 @@ export default function () {
                             Expertise on concepts
                         </div>
                         <div className="workshopOverviewContent">
-                            Learn options , charting and account management
+                            Learn options , charting, trading indicators and account management
                             concepts.
                         </div>
                         <div className="timingSection">
                             <img src={clock}></img>
                             <span className="WorkshopOverviewTimings">
-                                3:00 Hours
+                                8:00 Hours
                             </span>
                         </div>
                     </div>
@@ -288,7 +371,7 @@ export default function () {
                         <div className="timingSection">
                             <img src={clock}></img>
                             <span className="WorkshopOverviewTimings">
-                                3:00 Hours
+                                2:00 Hours
                             </span>
                         </div>
                     </div>
@@ -306,7 +389,7 @@ export default function () {
                         <div className="timingSection">
                             <img src={clock}></img>
                             <span className="WorkshopOverviewTimings">
-                                4:00 Hours
+                                Lifetime
                             </span>
                         </div>
                     </div>
@@ -403,7 +486,7 @@ export default function () {
                         </div>
                         <div>
                             <label className="container">
-                                Workshop 1
+                                Workshop 1 (Starting March 18, 2023)
                                 <input
                                     type="radio"
                                     name="radio"
@@ -415,7 +498,7 @@ export default function () {
                         </div>
                         <div>
                             <label className="container">
-                                Workshop 2
+                                Workshop 2 (Starting May 6, 2023)
                                 <input
                                     type="radio"
                                     name="radio"
@@ -432,8 +515,33 @@ export default function () {
                         )}
 
                         <button type="submit" value="Send" className="registerBtn">
-                            Next
+                            Register
                         </button>
+
+                        <div>
+                        <BootstrapDialog
+                            onClose={handleClose}
+                            aria-labelledby="customized-dialog-title"
+                            open={open}
+                        >
+                            <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose} className="heading">
+                            Payment Info
+                            </BootstrapDialogTitle>
+                            <DialogContent dividers>
+                            <Typography gutterBottom className="contactCardsContent">
+                            Thank you for showing interest in the option trading workshop offered by SecureAdv. 
+                            Please complete the payment of $395.00 using the QR below or payment link sent to your email.
+                            </Typography>
+                            </DialogContent>
+                            <img className="QRImg" src={Zelle_QR}></img>
+                            <DialogActions>
+                            <Button autoFocus onClick={handleClose} className="workshopBtn">
+                                Ok
+                            </Button>
+                            </DialogActions>
+                        </BootstrapDialog>
+                        </div>
+
                     </form>
                 </div>
             </div>
